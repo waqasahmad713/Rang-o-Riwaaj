@@ -1,0 +1,178 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ivory: #faf7f2;
+  --color-sand: #f2ebe0;
+  --color-sand-deep: #e8dccb;
+  --color-line: #e5ddd1;
+  --color-ink: #1c1917;
+  --color-ink-soft: #44403c;
+  --color-muted: #5f5750;
+  --color-maroon: #6b1e2e;
+  --color-maroon-dark: #4f1522;
+  --color-gold: #a8834b;
+  --color-gold-light: #d8c29b;
+  --color-emerald: #1f4d3a;
+  --color-charcoal: #191b1d;
+  --color-success: #2f6b3f;
+  --color-danger: #b42318;
+
+  --font-serif: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
+  --font-sans: var(--font-montserrat), "Montserrat", system-ui, sans-serif;
+
+  --animate-fade-up: fade-up 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-fade-in: fade-in 0.3s ease-out both;
+  --animate-slide-in-right: slide-in-right 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-slide-in-left: slide-in-left 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-marquee: marquee 40s linear infinite;
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  @keyframes slide-in-right {
+    from {
+      transform: translateX(100%);
+    }
+    to {
+      transform: none;
+    }
+  }
+  @keyframes slide-in-left {
+    from {
+      transform: translateX(-100%);
+    }
+    to {
+      transform: none;
+    }
+  }
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-ivory text-ink font-sans antialiased;
+    font-feature-settings: "kern";
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-serif text-ink;
+    letter-spacing: -0.01em;
+  }
+  ::selection {
+    @apply bg-maroon text-ivory;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-maroon);
+    outline-offset: 2px;
+  }
+  button,
+  [role="button"],
+  summary,
+  label[for],
+  select {
+    cursor: pointer;
+  }
+  button:disabled {
+    cursor: not-allowed;
+  }
+}
+
+@layer components {
+  .container-x {
+    @apply mx-auto w-full max-w-[1400px] px-4 sm:px-6 lg:px-10;
+  }
+  .eyebrow {
+    @apply text-[11px] font-semibold uppercase tracking-[0.28em] text-gold;
+  }
+  .section-title {
+    @apply font-serif text-3xl leading-tight font-medium sm:text-4xl lg:text-[2.75rem];
+  }
+  .btn,
+  .btn-primary,
+  .btn-accent,
+  .btn-outline,
+  .btn-light,
+  .btn-ghost-light {
+    @apply inline-flex items-center justify-center gap-2 rounded-none px-7 py-3.5 text-xs font-semibold uppercase tracking-[0.18em] transition-colors duration-200 disabled:opacity-50;
+  }
+  .btn-primary {
+    @apply bg-ink text-ivory hover:bg-maroon;
+  }
+  .btn-accent {
+    @apply bg-maroon text-ivory hover:bg-maroon-dark;
+  }
+  .btn-outline {
+    @apply border border-ink text-ink hover:bg-ink hover:text-ivory;
+  }
+  .btn-light {
+    @apply bg-ivory text-ink hover:bg-gold-light;
+  }
+  .btn-ghost-light {
+    @apply border border-ivory/70 text-ivory hover:bg-ivory hover:text-ink;
+  }
+  .input {
+    @apply w-full border border-line bg-white px-4 py-3 text-sm text-ink placeholder:text-muted/70 transition-colors focus:border-ink focus:outline-none;
+  }
+  .label {
+    @apply mb-1.5 block text-xs font-semibold uppercase tracking-[0.14em] text-ink-soft;
+  }
+  .link-underline {
+    @apply relative after:absolute after:-bottom-0.5 after:left-0 after:h-px after:w-full after:origin-right after:scale-x-0 after:bg-current after:transition-transform after:duration-300 hover:after:origin-left hover:after:scale-x-100;
+  }
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .prose-rr p {
+    @apply mb-4 leading-relaxed text-ink-soft;
+  }
+  .prose-rr h2 {
+    @apply mt-10 mb-3 text-2xl font-medium sm:text-3xl;
+  }
+  .prose-rr h3 {
+    @apply mt-6 mb-2 text-xl font-semibold;
+  }
+  .prose-rr ul {
+    @apply mb-4 list-disc space-y-1.5 pl-5 text-ink-soft;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
