@@ -37,7 +37,6 @@ const columns = [
       { label: "Fashion Journal", href: "/journal" },
       { label: "Style Stories", href: "/style-stories" },
       { label: "Careers", href: "/careers" },
-      { label: "Add products", href: "/admin" },
     ],
   },
 ];

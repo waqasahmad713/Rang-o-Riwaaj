@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { useRouter } from "next/navigation";
 import { announcements, coupons } from "@/data/site";
 import { getAllProducts, totalStock } from "@/lib/catalog";
 import { formatPrice } from "@/lib/format";
@@ -10,6 +11,7 @@ import { PageHero } from "@/components/pages/PageHero";
 import { ProductForm } from "./ProductForm";
 
 export function AdminDesk() {
+  const router = useRouter();
   const hydrated = useHydrated();
   const override = useBanners((s) => s.items);
   const setItems = useBanners((s) => s.setItems);
@@ -37,9 +39,21 @@ export function AdminDesk() {
         eyebrow="Studio"
         title="Store desk"
         text="This is where you upload new clothing — photos, name and price. Published items appear in the shop immediately."
-        crumbs={[{ label: "Home", href: "/" }, { label: "Admin" }]}
+        crumbs={[{ label: "Home", href: "/" }, { label: "Studio" }]}
       />
       <div className="container-x py-10 lg:py-14">
+        <div className="mb-6 flex justify-end">
+          <button
+            type="button"
+            className="text-xs font-semibold tracking-[0.14em] text-muted uppercase underline hover:text-ink"
+            onClick={async () => {
+              await fetch("/api/admin/logout", { method: "POST" });
+              window.location.href = "/admin/login";
+            }}
+          >
+            Sign out
+          </button>
+        </div>
         <dl className="mb-8 grid grid-cols-2 gap-4 lg:grid-cols-4">
           {[
             ["Products", String(products.length)],
